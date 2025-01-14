@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 0%;
+  --foreground: 60 100% 50%;
+  
+  --primary: 45 100% 50%;
+  --primary-foreground: 0 0% 0%;
+  
+  --secondary: 30 100% 50%;
+  --secondary-foreground: 0 0% 0%;
+  
+  --muted: 0 0% 20%;
+  --muted-foreground: 60 100% 50%;
+  
+  --accent: 45 100% 50%;
+  --accent-foreground: 0 0% 0%;
+}
+
+body {
+  @apply bg-black text-white;
+}
+
+.bg-space-gradient {
+  background: linear-gradient(to bottom, #000000, #0c0c2d, #1a1a4a);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffd700;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff4400;
+}
+
+.glow {
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5),
+               0 0 20px rgba(255, 215, 0, 0.3),
+               0 0 30px rgba(255, 215, 0, 0.1);
+}
+
+.section {
+  @apply py-20 px-4;
+}
+
+.container {
+  @apply max-w-7xl mx-auto;
+}
+
+.title {
+  @apply text-4xl font-bold mb-8 text-center text-orange-500 glow;
+}
+
+.subtitle {
+  @apply text-xl mb-4 text-yellow-200;
+}
+

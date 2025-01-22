@@ -1,13 +1,29 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion"
 
 const LocationSection = () => {
   return (
-    <section id="location" className="py-20 px-4 bg-gray-900">
-      <div className="container mx-auto">
+    <section id="location" className="py-20 px-4 bg-black relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute text-8xl font-bold text-white whitespace-nowrap"
+            style={{
+              top: `${(i * 100) % 800}px`,
+              left: `${(i * 300) % 2000}px`,
+              transform: `rotate(${i * 45}deg)`,
+            }}
+          >
+            LOCATION
+          </div>
+        ))}
+      </div>
+      <div className="container mx-auto relative">
         <motion.h2
-          className="text-4xl font-bold mb-12 text-center text-orange-500"
+          className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -21,16 +37,12 @@ const LocationSection = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-2xl font-bold mb-4 text-orange-500">Thakur College of Engineering and Technology</h3>
-            <p className="text-gray-300 mb-4">
-              A-Block, Gate No 5, Thakur Educational Campus, <br /> 
-              Thakur Rd, Thakur Village, <br />
-              Kandivali East, Mumbai, <br />
-              Maharashtra , India 
-            </p>
-            <p className="text-gray-300">
-              Join us at the prestigious Thakur College for an enriching tech event experience!
-            </p>
+             <h3 className="text-2xl font-bold mb-4 text-orange-500">Thakur College of Engineering and Technology</h3> 
+             <p className="text-gray-300 mb-4"> A-Block, Gate No 5, Thakur Educational Campus, 
+              <br /> Thakur Rd, Thakur Village, 
+              <br /> Kandivali East, Mumbai, 
+              <br /> Maharashtra , India </p> 
+             <p className="text-gray-300"> Join us at the prestigious Thakur College for an enriching tech event experience! </p>
           </motion.div>
           <motion.div
             className="w-full md:w-1/2"
@@ -54,3 +66,4 @@ const LocationSection = () => {
 }
 
 export default LocationSection
+

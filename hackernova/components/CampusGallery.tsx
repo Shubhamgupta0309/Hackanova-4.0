@@ -1,14 +1,8 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-
-const campusImages = [
-  '/placeholder.svg?height=300&width=400',
-  '/placeholder.svg?height=300&width=400',
-  '/placeholder.svg?height=300&width=400',
-  '/placeholder.svg?height=300&width=400'
-]
+import { motion } from "framer-motion"
+import Image from "next/image"
+import { IMAGES } from "./constants/images"
 
 export default function CampusGallery() {
   return (
@@ -22,11 +16,11 @@ export default function CampusGallery() {
         >
           Campus Gallery
         </motion.h2>
-        <div className="grid grid-cols-4 gap-4">
-          {campusImages.map((image, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {IMAGES.campus.map((image, index) => (
             <motion.div
               key={index}
-              className="relative h-[300px] overflow-hidden rounded-lg"
+              className="relative h-[300px] overflow-hidden rounded-lg group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -34,12 +28,15 @@ export default function CampusGallery() {
               whileHover={{ scale: 1.05 }}
             >
               <Image
-                src={image}
+                src={image || "/placeholder.svg"}
                 alt={`Campus ${index + 1}`}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-300 hover:scale-110"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-110"
               />
+              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <span className="text-white text-lg font-bold">View Campus</span>
+              </div>
             </motion.div>
           ))}
         </div>

@@ -1,18 +1,9 @@
-'use client'
+"use client"
 
-import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-
-// Define your images here
-const IMAGES = {
-  highlights: [
-    '/images/image.jpg',
-    '/images/image.jpg',
-    '/images/image.jpg',
-    '/images/image.jpg',
-  ],
-}
+import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
+import Image from "next/image"
+import { IMAGES } from "./constants/images"
 
 export default function HighlightsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -55,7 +46,7 @@ export default function HighlightsSection() {
           <span className="ml-4 bg-red-600 px-4 py-1 text-white">HIGHLIGHTS</span>
         </motion.h2>
         <div className="relative h-[400px] overflow-hidden rounded-lg">
-          <div 
+          <div
             className="flex transition-transform duration-500 ease-in-out h-full"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
@@ -68,9 +59,10 @@ export default function HighlightsSection() {
                 transition={{ duration: 0.5 }}
               >
                 <Image
-                  src={image}
+                  src={image || "/placeholder.svg"}
                   alt={`Highlight ${index + 1}`}
                   fill
+                  sizes="100vw"
                   className="rounded-lg object-cover"
                   priority={index === 0}
                 />
@@ -83,7 +75,7 @@ export default function HighlightsSection() {
             <button
               key={index}
               className={`w-3 h-3 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-red-500' : 'bg-gray-500'
+                index === currentIndex ? "bg-red-500" : "bg-gray-500"
               }`}
               onClick={() => setCurrentIndex(index)}
             />
@@ -93,3 +85,4 @@ export default function HighlightsSection() {
     </section>
   )
 }
+

@@ -1,14 +1,15 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { motion } from "framer-motion"
+import Image from "next/image"
+import { IMAGES } from "./constants/images"
 
 const SpeakersSection = () => {
   const speakers = [
-    { name: 'Jane Doe', role: 'AI Researcher', image: '/placeholder.svg' },
-    { name: 'John Smith', role: 'Tech Entrepreneur', image: '/placeholder.svg' },
-    { name: 'Alice Johnson', role: 'Cybersecurity Expert', image: '/placeholder.svg' },
-    { name: 'Bob Williams', role: 'Blockchain Developer', image: '/placeholder.svg' },
+    { name: "Jane Doe", role: "AI Researcher", image: IMAGES.speakers[0] },
+    { name: "John Smith", role: "Tech Entrepreneur", image: IMAGES.speakers[1] },
+    { name: "Alice Johnson", role: "Cybersecurity Expert", image: IMAGES.speakers[2] },
+    { name: "Bob Williams", role: "Blockchain Developer", image: IMAGES.speakers[3] },
   ]
 
   return (
@@ -33,11 +34,11 @@ const SpeakersSection = () => {
             >
               <div className="relative w-48 h-48 mx-auto mb-4 overflow-hidden rounded-full">
                 <Image
-                  src={speaker.image}
+                  src={speaker.image || "/placeholder.svg"}
                   alt={speaker.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-300 hover:scale-110"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  className="transition-transform duration-300 hover:scale-110 object-cover"
                 />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-orange-500">{speaker.name}</h3>

@@ -1,16 +1,17 @@
-'use client'
+"use client"
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { motion } from "framer-motion"
+import Image from "next/image"
+import { IMAGES } from "./constants/images"
 
 const SponsorsSection = () => {
   const sponsors = [
-    { name: 'TechCorp', logo: '/images/devfolio.png' },
-    { name: 'InnovateCo', logo: '/images/polygon.png' },
-    { name: 'FutureTech', logo: '/images/replit.png' },
-    { name: 'CodeMasters', logo: '/images/echo.png' },
-    { name: 'DataDynamics', logo: '/images/xyz.png' },
-    { name: 'CloudNine', logo: '/images/rosenfeld.png' },
+    { name: "TechCorp", logo: IMAGES.sponsors[0] },
+    { name: "InnovateCo", logo: IMAGES.sponsors[1] },
+    { name: "FutureTech", logo: IMAGES.sponsors[2] },
+    { name: "CodeMasters", logo: IMAGES.sponsors[3] },
+    { name: "DataDynamics", logo: IMAGES.sponsors[4] },
+    { name: "CloudNine", logo: IMAGES.sponsors[5] },
   ]
 
   return (
@@ -35,11 +36,11 @@ const SponsorsSection = () => {
             >
               <div className="relative w-32 h-32">
                 <Image
-                  src={sponsor.logo}
+                  src={sponsor.logo || "/placeholder.svg"}
                   alt={sponsor.name}
-                  layout="fill"
-                  objectFit="contain"
-                  className="transition-all duration-300 filter grayscale hover:grayscale-0 hover:scale-110"
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 16vw"
+                  className="transition-all duration-300 filter grayscale hover:grayscale-0 hover:scale-110 object-contain"
                 />
               </div>
             </motion.div>

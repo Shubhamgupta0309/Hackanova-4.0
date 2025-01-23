@@ -1,17 +1,30 @@
 export const IMAGES = {
-    logo: "https://assets.devfolio.co/hackathons/d918ed41893d49d3975dcfb56c91207d/assets/favicon/861.jpeg",
-    highlights: Array(5).fill(
-      "https://assets.devfolio.co/hackathons/d918ed41893d49d3975dcfb56c91207d/assets/favicon/861.jpeg",
-    ),
-    campus: Array(4).fill(
-      "https://assets.devfolio.co/hackathons/d918ed41893d49d3975dcfb56c91207d/assets/favicon/861.jpeg",
-    ),
-    speakers: Array(4).fill(
-      "https://assets.devfolio.co/hackathons/d918ed41893d49d3975dcfb56c91207d/assets/favicon/861.jpeg",
-    ),
-    sponsors: Array(6).fill(
-      "https://assets.devfolio.co/hackathons/d918ed41893d49d3975dcfb56c91207d/assets/favicon/861.jpeg",
-    ),
-  }
-  
-  
+  logo: "/image/imp.jpg",
+  highlights: [
+    "/images/highlight1.jpg",
+    "/images/highlight2.jpg",
+    "/images/highlight3.jpg",
+    "/images/highlight4.jpg",
+    "/images/highlight5.jpg",
+    "/images/highlight6.jpg",
+    "/images/highlight7.jpg",
+    "/images/highlight8.jpg",
+    "/images/highlight9.jpg",
+    "/images/highlight10.jpg"
+  ],
+  campus: [
+    "/images/campus1.png",
+    "/images/campus2.png",
+    "/images/campus3.png",
+    "/images/campus4.png",
+  ],
+  speakers: Array(4).fill("/images/tcet.jpg"),
+  sponsors: [
+    "/images/devfolio.png",
+    "/images/echo.png",
+    "/images/polygon.png",
+    "/images/replit.png",
+    "/images/rosenfeld.png",
+    "/images/xyz.png"
+  ],
+};

@@ -1,54 +1,46 @@
-'use client'
+"use client"
 
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useAnimation, useInView } from "framer-motion"
+import { useEffect, useRef } from "react"
 
 interface ScrollAnimationProps {
   children: React.ReactNode
-  animation?: 'fade' | 'slideUp' | 'slideLeft' | 'slideRight' | 'scale' | 'rotate'
+  animation?: "fade" | "slideUp" | "slideLeft" | "slideRight" | "scale" | "rotate"
 }
 
-export default function ScrollAnimation({ children, animation = 'fade' }: ScrollAnimationProps) {
+export default function ScrollAnimation({ children, animation = "fade" }: ScrollAnimationProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  })
+  const isInView = useInView(ref, { once: false, amount: 0.3 })
+  const controls = useAnimation()
 
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 }
-  const springValue = useSpring(scrollYProgress, springConfig)
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible")
+    } else {
+      controls.start("hidden")
+    }
+  }, [isInView, controls])
 
-  const animations = {
-    fade: {
-      opacity: useTransform(springValue, [0, 0.5], [0, 1]),
+  const variants = {
+    hidden: {
+      opacity: 0,
+      y: animation === "slideUp" ? 100 : 0,
+      x: animation === "slideLeft" ? -100 : animation === "slideRight" ? 100 : 0,
+      scale: animation === "scale" ? 0.8 : 1,
+      rotate: animation === "rotate" ? -20 : 0,
     },
-    slideUp: {
-      opacity: useTransform(springValue, [0, 0.5], [0, 1]),
-      y: useTransform(springValue, [0, 1], [100, 0]),
-    },
-    slideLeft: {
-      opacity: useTransform(springValue, [0, 0.5], [0, 1]),
-      x: useTransform(springValue, [0, 1], [-100, 0]),
-    },
-    slideRight: {
-      opacity: useTransform(springValue, [0, 0.5], [0, 1]),
-      x: useTransform(springValue, [0, 1], [100, 0]),
-    },
-    scale: {
-      opacity: useTransform(springValue, [0, 0.5], [0, 1]),
-      scale: useTransform(springValue, [0, 1], [0.8, 1]),
-    },
-    rotate: {
-      opacity: useTransform(springValue, [0, 0.5], [0, 1]),
-      rotate: useTransform(springValue, [0, 1], [-20, 0]),
+    visible: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      scale: 1,
+      rotate: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
     },
   }
 
   return (
-    <motion.div
-      ref={ref}
-      style={animations[animation]}
-    >
+    <motion.div ref={ref} initial="hidden" animate={controls} variants={variants}>
       {children}
     </motion.div>
   )

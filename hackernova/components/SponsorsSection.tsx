@@ -6,12 +6,12 @@ import { IMAGES } from "./constants/images"
 
 const SponsorsSection = () => {
   const sponsors = [
-    { name: "TechCorp", logo: IMAGES.sponsors[0] },
-    { name: "InnovateCo", logo: IMAGES.sponsors[1] },
-    { name: "FutureTech", logo: IMAGES.sponsors[2] },
-    { name: "CodeMasters", logo: IMAGES.sponsors[3] },
-    { name: "DataDynamics", logo: IMAGES.sponsors[4] },
-    { name: "CloudNine", logo: IMAGES.sponsors[5] },
+    { name: "Devfolio", logo: IMAGES.sponsors[0] },
+    { name: "Echo", logo: IMAGES.sponsors[1] },
+    { name: "Polygon", logo: IMAGES.sponsors[2] },
+    { name: "replit", logo: IMAGES.sponsors[3] },
+    { name: "rosenfeld", logo: IMAGES.sponsors[4] },
+    { name: "xyz", logo: IMAGES.sponsors[5] },
   ]
 
   return (

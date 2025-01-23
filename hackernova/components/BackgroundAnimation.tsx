@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react"
 
 const BackgroundAnimation = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -9,7 +9,7 @@ const BackgroundAnimation = () => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext("2d")
     if (!ctx) return
 
     canvas.width = window.innerWidth
@@ -25,27 +25,27 @@ const BackgroundAnimation = () => {
       speedX: number
       speedY: number
 
-      constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+      constructor(canvasWidth: number, canvasHeight: number) {
+        this.x = Math.random() * canvasWidth
+        this.y = Math.random() * canvasHeight
         this.size = Math.random() * 3 + 1
         this.speedX = Math.random() * 3 - 1.5
         this.speedY = Math.random() * 3 - 1.5
       }
 
-      update() {
+      update(canvasWidth: number, canvasHeight: number) {
         this.x += this.speedX
         this.y += this.speedY
 
-        if (this.x > canvas.width) this.x = 0
-        else if (this.x < 0) this.x = canvas.width
+        if (this.x > canvasWidth) this.x = 0
+        else if (this.x < 0) this.x = canvasWidth
 
-        if (this.y > canvas.height) this.y = 0
-        else if (this.y < 0) this.y = canvas.height
+        if (this.y > canvasHeight) this.y = 0
+        else if (this.y < 0) this.y = canvasHeight
       }
 
-      draw() {
-        ctx.fillStyle = 'rgba(255, 165, 0, 0.5)'
+      draw(ctx: CanvasRenderingContext2D) {
+        ctx.fillStyle = "rgba(255, 165, 0, 0.5)"
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
@@ -53,16 +53,18 @@ const BackgroundAnimation = () => {
     }
 
     for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle())
+      particles.push(new Particle(canvas.width, canvas.height))
     }
 
     function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update()
-        particles[i].draw()
+      if (canvas && ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update(canvas.width, canvas.height)
+          particles[i].draw(ctx)
+        }
+        requestAnimationFrame(animate)
       }
-      requestAnimationFrame(animate)
     }
 
     animate()
@@ -72,10 +74,10 @@ const BackgroundAnimation = () => {
       canvas.height = window.innerHeight
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize)
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener("resize", handleResize)
     }
   }, [])
 

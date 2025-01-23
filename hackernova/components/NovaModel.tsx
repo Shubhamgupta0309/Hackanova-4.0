@@ -1,15 +1,15 @@
-'use client'
+"use client"
 
-import { useRef } from 'react'
-import { Canvas, useFrame, extend } from '@react-three/fiber'
-import { Environment, OrbitControls, shaderMaterial } from '@react-three/drei'
-import * as THREE from 'three'
+import { useRef } from "react"
+import { Canvas, useFrame, extend } from "@react-three/fiber"
+import { Environment, OrbitControls, shaderMaterial } from "@react-three/drei"
+import * as THREE from "three"
 
 const NovaMaterial = shaderMaterial(
   {
     time: 0,
-    color1: new THREE.Color('#ffd700'),
-    color2: new THREE.Color('#ff4400'),
+    color1: new THREE.Color("#ffd700"),
+    color2: new THREE.Color("#ff4400"),
   },
   `
     varying vec2 vUv;
@@ -29,7 +29,7 @@ const NovaMaterial = shaderMaterial(
       float alpha = 0.5 + 0.3 * sin(time + vUv.x * 10.0) * sin(time + vUv.y * 10.0);
       gl_FragColor = vec4(color, alpha);
     }
-  `
+  `,
 )
 
 extend({ NovaMaterial })
@@ -52,7 +52,7 @@ function Nova() {
     <group>
       <mesh ref={mesh} position={[0, 0, 0]} scale={[1.5, 1.5, 1.5]}>
         <sphereGeometry args={[1, 64, 64]} />
-        {/* @ts-ignore */}
+        {/* @ts-expect-error - novaMaterial is not recognized by TypeScript */}
         <novaMaterial ref={materialRef} transparent />
       </mesh>
     </group>
@@ -67,9 +67,9 @@ export default function NovaScene() {
       <pointLight position={[-10, -10, -10]} color="#ff4400" intensity={0.5} />
       <Nova />
       <Environment preset="night" />
-      <OrbitControls 
-        enableZoom={false} 
-        autoRotate 
+      <OrbitControls
+        enableZoom={false}
+        autoRotate
         autoRotateSpeed={1}
         maxPolarAngle={Math.PI / 2}
         minPolarAngle={Math.PI / 2}

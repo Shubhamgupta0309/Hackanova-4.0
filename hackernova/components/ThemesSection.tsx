@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Brain, Blocks, Sparkles, Network, Code2, Cpu } from "lucide-react"
+import type React from "react"
 
 const ThemeCard = ({
   theme,
@@ -14,9 +15,9 @@ const ThemeCard = ({
   theme: string
   description: string
   index: number
-  icon1: any
-  icon2: any
-  icon3: any
+  icon1: React.ElementType
+  icon2: React.ElementType
+  icon3: React.ElementType
 }) => (
   <motion.div
     className="relative h-[600px] bg-black bg-opacity-50 rounded-2xl p-8 border border-orange-500/20 overflow-hidden group"

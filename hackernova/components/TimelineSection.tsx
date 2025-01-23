@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
 import { Clock, Rocket, Users, FileCheck, Trophy, PresentationIcon as PresentationChart } from "lucide-react"
+import type React from "react"
 
 const TimelineEvent = ({
   date,
@@ -12,7 +13,7 @@ const TimelineEvent = ({
 }: {
   date: string
   title: string
-  icon: any
+  icon: React.ElementType
   index: number
 }) => {
   const ref = useRef(null)

@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 
 interface CountdownProps {
   targetDate: Date
@@ -12,7 +12,7 @@ const RegistrationCountdown: React.FC<CountdownProps> = ({ targetDate }) => {
 
   function calculateTimeLeft() {
     const difference = +targetDate - +new Date()
-    let timeLeft: any = {}
+    let timeLeft: Record<string, number> = {}
 
     if (difference > 0) {
       timeLeft = {
@@ -45,7 +45,7 @@ const RegistrationCountdown: React.FC<CountdownProps> = ({ targetDate }) => {
           className="text-3xl font-bold text-orange-500"
           initial={{ scale: 1 }}
           animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
+          transition={{ duration: 0.5, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
         >
           {timeLeft[interval]}
         </motion.span>

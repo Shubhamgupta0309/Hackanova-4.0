@@ -1,25 +1,35 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { IMAGES } from "./constants/images"
 import ScrollAnimation from "./ScrollAnimation"
 
 export default function HighlightsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 2) % IMAGES.highlights.length)
-    }, 5000)
+    const scrollContainer = scrollRef.current
+    if (!scrollContainer) return
+
+    const scroll = () => {
+      if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth - scrollContainer.clientWidth) {
+        scrollContainer.scrollLeft = 0
+      } else {
+        scrollContainer.scrollLeft += 1
+      }
+    }
+
+    const timer = setInterval(scroll, 50)
 
     return () => clearInterval(timer)
   }, [])
 
   return (
     <section className="py-20 px-4 bg-black relative overflow-hidden">
-      <div className="absolute inset-0 opacity-5">
+      {/* Background Text */}
+      <div className="absolute inset-0 opacity-5 overflow-hidden">
         {Array.from({ length: 20 }).map((_, i) => (
           <div
             key={i}
@@ -34,51 +44,54 @@ export default function HighlightsSection() {
           </div>
         ))}
       </div>
+
       <div className="container mx-auto relative">
         <ScrollAnimation animation="slideUp">
-          <motion.h2
-            className="text-4xl font-bold text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+              <span className="text-white">HACKVERSE 4.0</span>{" "}
+              <span className="bg-red-700 px-4 py-1 text-white inline-block">HIGHLIGHTS</span>
+            </h2>
+          </div>
+
+          <div
+            ref={scrollRef}
+            className="relative overflow-x-hidden w-full"
+            style={{ WebkitOverflowScrolling: "touch" }}
           >
-            <span className="bg-gradient-to-r from-red-500 to-orange-500 text-transparent bg-clip-text">
-              HACKERNOVA 4.0
-            </span>
-            <span className="ml-4 bg-red-600 px-4 py-1 text-white">HIGHLIGHTS</span>
-          </motion.h2>
-          <div className="relative h-[400px] overflow-hidden rounded-lg">
-            <div
-              className="flex transition-transform duration-500 ease-in-out h-full"
-              style={{ transform: `translateX(-${currentIndex * 50}%)` }}
-            >
-              {IMAGES.highlights.map((image, index) => (
+            <div className="flex gap-8 pb-4">
+              {[...IMAGES.highlights, ...IMAGES.highlights].map((image, index) => (
                 <motion.div
                   key={index}
-                  className="min-w-[50%] h-full relative px-4" // Adjusted padding here
+                  className="relative flex-none w-[300px] md:w-[500px] h-[200px] md:h-[300px] rounded-lg overflow-hidden"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <Image
                     src={image || "/placeholder.svg"}
                     alt={`Highlight ${index + 1}`}
                     fill
-                    sizes="50vw"
-                    className="rounded-lg object-cover"
+                    className="object-cover rounded-lg transform hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 300px, 500px"
+                    priority={index < 3}
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
                 </motion.div>
               ))}
             </div>
           </div>
-          <div className="flex justify-center mt-4 gap-2">
-            {Array.from({ length: Math.ceil(IMAGES.highlights.length / 2) }).map((_, index) => (
+
+          <div className="flex justify-center mt-8 gap-2">
+            {IMAGES.highlights.map((_, index) => (
               <button
                 key={index}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentIndex / 2 ? "bg-red-500" : "bg-gray-500"
-                }`}
-                onClick={() => setCurrentIndex(index * 2)}
+                className="w-2 h-2 rounded-full bg-red-700 opacity-50 hover:opacity-100 transition-opacity"
+                onClick={() => {
+                  if (scrollRef.current) {
+                    scrollRef.current.scrollLeft = index * (scrollRef.current.clientWidth / 3)
+                  }
+                }}
               />
             ))}
           </div>
@@ -87,3 +100,4 @@ export default function HighlightsSection() {
     </section>
   )
 }
+

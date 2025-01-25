@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Menu, X } from "lucide-react"
+import Image from "next/image"
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -31,8 +32,8 @@ const Header = () => {
       transition={{ duration: 0.5 }}
     >
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-orange-500">
-          Hackernova 4.0
+        <Link href="/">
+          <Image src="/images/tsdwlogo.png" alt="Logo" width={150} height={50} />
         </Link>
         <div className="hidden md:flex space-x-6">
           {["About", "Themes", "Timeline", "Speakers", "Sponsors"].map((item) => (
@@ -54,7 +55,7 @@ const Header = () => {
           href="https://devfolio.co/hackernova"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 animate-pulse"
+          className="hidden md:inline-block bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full transition-colors"
         >
           Apply Now
         </a>
@@ -95,4 +96,3 @@ const Header = () => {
 }
 
 export default Header
-

@@ -53,7 +53,7 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            About Hackernova 4.0
+            About Hackanova 4.0
           </motion.h2>
 
           <motion.p
@@ -62,7 +62,7 @@ const AboutSection = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Hackernova 4.0 is a dynamic journey that brings together talented students, mentors, and institutions to
+            Hackanova 4.0 is a dynamic journey that brings together talented students, mentors, and institutions to
             solve real-world problems through code. It's a space where passion meets technology, and every line of code
             has the power to change the world. <br />
             <span className="text-orange-500">Join us as we build, innovate, and learn together!</span>

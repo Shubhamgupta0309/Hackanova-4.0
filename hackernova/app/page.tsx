@@ -12,6 +12,7 @@ import SponsorsSection from '../components/SponsorsSection'
 import LocationSection from '../components/LocationSection'
 import Footer from '../components/Footer'
 import ParticleBackground from '../components/ParticleBackground'
+import TsdwSection from '@/components/TsdwSection'
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
         <LocationSection />
         <FaqSection />
         <CampusGallery />
+        <TsdwSection />
         <Footer />
       </div>
     </main>
